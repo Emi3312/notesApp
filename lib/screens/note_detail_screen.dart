@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:typed_data';
 import '../models/note.dart';
-
 
 class NoteDetailScreen extends StatelessWidget {
   final Note note;
@@ -18,11 +18,20 @@ class NoteDetailScreen extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             if (note.content != null && note.content!.isNotEmpty)
-              Text(
-                note.content!,
-                style: TextStyle(fontSize: 22.0),
+              Text(note.content!, style: TextStyle(fontSize: 25.0)),
+            if (note.photo != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Image.memory(note.photo!),
               ),
-            // Aquí puedes añadir más detalles como la ubicación y la foto si están disponibles
+            if (note.location != null && note.location!.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  'Ubicación: ${note.location}',
+                  style: TextStyle(fontSize: 16.0, fontStyle: FontStyle.italic),
+                ),
+              ),
           ],
         ),
       ),
